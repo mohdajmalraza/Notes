@@ -340,4 +340,14 @@ Use `onDelete: 'CASCADE'` for a document/file system like yours because:
 | Model         | `folderId` | `onDelete`, `onUpdate` |
 | Migration     | `folderId` | `onDelete`, `onUpdate` |
 
+```
+// ✅ folder.destroy(): Deletes this specific folder instance and triggers model-level hooks.
+// Useful when you already have the folder instance (e.g., from a findByPk). 
+// It respects associations and cascade delete if configured.
+
+// ✅ Folder.destroy({ where: { folderId } }): Deletes directly at the model level without fetching the instance first.
+// Faster for bulk or direct deletion but skips instance-level hooks unless explicitly configured.
+// Will still delete associated files *only* if `onDelete: 'CASCADE'` is set in the model & migration.
+```
+
 ---
